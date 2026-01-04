@@ -9,13 +9,13 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 
 // Database Name
-const dbName = 'test2025';
+const dbName = 'tc2025';
 
 async function main() {
     await client.connect();
     console.log('Connected successfully to server');
     const db = client.db(dbName);
-    const collection = db.collection('telegram_gifts'); // Новая коллекция
+    const collection = db.collection('gifts'); // Новая коллекция
 
     // Вставляем данные из data.js
     const insertResult = await collection.insertMany(data);
