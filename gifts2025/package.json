@@ -11,6 +11,7 @@
     "ejs": "^3.1.10",
     "ejs-locals": "^1.0.2",
     "express": "~4.16.1",
+    "express-session": "^1.18.2",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongodb": "^7.0.0",
