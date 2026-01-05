@@ -10,8 +10,6 @@ var session = require("express-session");
 
 // ============ ДЛЯ ВЕРСИИ 6.0.0 ============
 const MongoStore = require('connect-mongo').default;
-// ИЛИ попробуйте:
-// const MongoStore = require('connect-mongo');
 // ==========================================
 
 var indexRouter = require('./routes/index');
@@ -37,12 +35,18 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     
-    // ============ ПОПРОБУЙТЕ ЭТОТ ВАРИАНТ ============
     store: new MongoStore({
         mongoUrl: 'mongodb://localhost/tc2025'
     })
-    // =================================================
 }));
+
+// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 9.4 ============
+// Middleware счётчика посещений (после сессии, перед роутерами!)
+app.use(function(req, res, next) {
+    req.session.counter = req.session.counter + 1 || 1;
+    next();
+});
+// ==================================================
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
