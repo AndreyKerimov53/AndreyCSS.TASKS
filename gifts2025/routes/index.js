@@ -26,7 +26,12 @@ router.get('/gift', function(req, res, next) {
 
 /* GET login/registration page. */
 router.get('/logreg', function(req, res, next) {
-    res.render('logreg', { title: 'Вход' });
+    // ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 10.6 ============
+    res.render('logreg', { 
+        title: 'Вход',
+        error: null  // ← Добавляем параметр error со значением null
+    });
+    // ====================================================
 });
 
 /* POST login/registration page. */
@@ -58,7 +63,12 @@ router.post('/logreg', async function(req, res, next) {
             res.redirect('/');
         } else {
             console.log("Неправильный пароль для:", username);
-            res.render('logreg', {title: 'Вход'});
+            // ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 10.6 ============
+            res.render('logreg', {
+                title: 'Вход',
+                error: 'Пароль не верный'  // ← Передаем сообщение об ошибке
+            });
+            // ====================================================
         }
         // ================================================================
     }
