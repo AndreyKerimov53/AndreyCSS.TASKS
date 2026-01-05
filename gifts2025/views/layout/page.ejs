@@ -20,17 +20,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/gift">Все подарки</a>
                     </li>
-                    <!-- ======== ИЗМЕНЕНО ПО ЗАДАНИЮ 8.4 ======== -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/gifts/precious.peach">Precious Peach</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/gifts/plush.pepe">Plush Pepe</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/gifts/durovs.cap">Durov's Cap</a>
-                    </li>
+                    
+                    <!-- ============ ДИНАМИЧЕСКОЕ МЕНЮ ============ -->
+                    <% if(typeof nav == 'object' && nav && nav.length > 0) { 
+                        nav.forEach(function(item) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/gifts/<%= item.nick %>"><%= item.title %></a>
+                            </li>
+                        <% });
+                    } %>
                     <!-- ========================================= -->
+                    
                 </ul>
             </div>
         </div>
