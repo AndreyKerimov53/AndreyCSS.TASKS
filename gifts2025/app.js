@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 8.1 ============
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/tc2025');
+// ==================================================
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
