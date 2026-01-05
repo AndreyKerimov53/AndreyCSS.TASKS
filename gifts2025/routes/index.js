@@ -33,4 +33,17 @@ router.get('/logreg', function(req, res, next) {
 });
 /* =================================================== */
 
+/* ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 10.3 ============ */
+/* POST login/registration page. */
+router.post('/logreg', function(req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    console.log(username);
+    console.log(password);
+    
+    res.redirect('/');
+});
+/* =================================================== */
+
 module.exports = router;
