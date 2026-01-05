@@ -4,11 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/tc2025'); // Ваша база tc2025!
+mongoose.connect('mongodb://localhost/tc2025');
 
-// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 9.1 ============
 var session = require("express-session");
-// ==================================================
+
+// ============ ДЛЯ ВЕРСИИ 6.0.0 ============
+const MongoStore = require('connect-mongo').default;
+// ИЛИ попробуйте:
+// const MongoStore = require('connect-mongo');
+// ==========================================
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,7 +20,6 @@ var giftsRouter = require('./routes/gifts');
 
 var app = express();
 
-// view engine setup
 app.engine('ejs', require('ejs-locals'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -27,16 +30,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 9.1 ============
-// Настройка сессии (добавить ПЕРЕД роутерами)
 app.use(session({
-    secret: "TelegramGifts", // Секретный ключ для подписи сессии
-    cookie: { maxAge: 60 * 1000 }, // Время жизни сессии: 1 минута
+    secret: "TelegramGifts",
+    cookie: { maxAge: 60 * 1000 },
     proxy: true,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    
+    // ============ ПОПРОБУЙТЕ ЭТОТ ВАРИАНТ ============
+    store: new MongoStore({
+        mongoUrl: 'mongodb://localhost/tc2025'
+    })
+    // =================================================
 }));
-// ==================================================
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
