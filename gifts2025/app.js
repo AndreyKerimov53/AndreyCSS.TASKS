@@ -11,6 +11,9 @@ mongoose.connect('mongodb://localhost/tc2025');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 8.2 ============
+var giftsRouter = require('./routes/gifts');
+// ==================================================
 
 var app = express();
 
@@ -27,6 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 8.2 ============
+app.use('/gifts', giftsRouter);
+// ==================================================
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
