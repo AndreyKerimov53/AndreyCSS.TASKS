@@ -5,13 +5,19 @@ var router = express.Router();
 var Gift = require('../models/gift').Gift;
 // =================================================
 
+// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 10.8 ============
+var checkAuth = require("../middlewares/checkAuth.js");
+// ===================================================
+
 /* GET gifts listing. */
 router.get('/', function(req, res, next) {
     res.send('Новый маршрутизатор, для маршрутов, начинающихся с gifts');
 });
 
 /* Страница подарков с параметром */
-router.get("/:nick", async function(req, res, next) {
+// ============ ДОБАВЛЕНО checkAuth КАК MIDDLEWARE (10.8) ============
+router.get("/:nick", checkAuth, async function(req, res, next) {
+// ===================================================================
     try {
         // ============ ЗАПРОС К БАЗЕ ДАННЫХ ============
         var gifts = await Gift.find({nick: req.params.nick});
