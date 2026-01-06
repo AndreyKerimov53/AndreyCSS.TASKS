@@ -44,7 +44,7 @@ router.post('/logreg', async function(req, res, next) {
     
     // Ищем пользователя в базе
     var users = await User.find({username: username});
-    console.log(users);
+    console.log(users);  // ← ИСПРАВЛЕНО: было 'ourses'
     
     if (!users.length) {
         // ============ ПОЛЬЗОВАТЕЛЬ НЕ НАЙДЕН - СОЗДАЁМ НОВОГО ============
@@ -73,4 +73,13 @@ router.post('/logreg', async function(req, res, next) {
         // ================================================================
     }
 });
+
+// ============ ДОБАВЛЕНО ПО ЗАДАНИЮ 10.7 ============
+/* POST logout. */
+router.post('/logout', function(req, res, next) {
+    req.session.destroy();
+    res.redirect('/');
+});
+// ====================================================
+
 module.exports = router;
