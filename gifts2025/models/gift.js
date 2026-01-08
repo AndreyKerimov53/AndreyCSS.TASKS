@@ -8,17 +8,27 @@ var giftSchema = new Schema({
     },
     nick: {
         type: String,
-        unique: true,       // Уникальный идентификатор для URL
+        unique: true,
         required: true
     },
-    avatar: String,         // Путь к изображению
-    desc: String,           // Описание
-    price: Number,          // Добавим цену, как в вашем testMongoose.js
+    avatar: String,
+    desc: String,
+    price: Number,
+    category: String,
+    models: [{
+        name: String,
+        rarity: String,
+        quantity: Number,
+        price: Number,
+        // ВАЖНО: Добавленные поля
+        telegramLink: String,
+        image: String,
+        description: String
+    }],
     created: {
         type: Date,
         default: Date.now
     }
 });
 
-// Экспортируем модель. Используем имя "Gift"
 module.exports.Gift = mongoose.model("Gift", giftSchema);

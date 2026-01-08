@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= gift.title || 'Модели' %> | Telegram Gifts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Градиентный фон */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: 40px;
+        }
+        
+        /* Основной контейнер */
+        .container-main {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Заголовок страницы */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Сетка моделей в 2 столбца */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        /* Карточка модели */
+        .model-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Название модели */
+        .model-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .model-name:before {
+            content: "🧸";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Характеристики */
+        .model-spec {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .spec-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .spec-value {
+            color: #222;
+            font-weight: 600;
+        }
+        
+        /* Редкость - цветные метки */
+        .rarity-high {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+        
+        .rarity-medium {
+            color: #4ecdc4;
+            font-weight: 700;
+        }
+        
+        .rarity-low {
+            color: #45b7d1;
+            font-weight: 700;
+        }
+        
+        /* Количество - стили */
+        .count-high {
+            color: #27ae60;
+            font-weight: 700;
+        }
+        
+        .count-low {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container-main {
+                padding: 25px;
+            }
+        }
+        
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ (используем существующую) -->
+    <% include partials/navbar.ejs || include navbar.ejs || include partials/header.ejs %>
+    
+    <!-- Основной контент -->
+    <div class="container container-main fade-in-up">
+        <!-- Заголовок -->
+        <div class="page-header">
+            <h1 class="display-4 fw-bold">
+                <% if (gift && gift.title) { %>
+                    <%= gift.title %>
+                <% } else { %>
+                    Модели коллекции
+                <% } %>
+            </h1>
+            <% if (gift && gift.subtitle) { %>
+                <p class="lead text-muted"><%= gift.subtitle %></p>
+            <% } %>
+        </div>
+        
+        <!-- Сетка моделей -->
+        <div class="models-grid">
+            <!-- Пример данных - в реальности будут приходить из бэкенда -->
+            <!-- Модель 1 -->
+            <div class="model-card">
+                <div class="model-name">Precious Peach</div>
+                <div class="model-spec">
+                    <span class="spec-label">Редкость:</span>
+                    <span class="spec-value rarity-high">0.1%</span>
+                </div>
+                <div class="model-spec">
+                    <span class="spec-label">В наличии:</span>
+                    <span class="spec-value count-low">3 шт.</span>
+                </div>
+            </div>
+            
+            <!-- Модель 2 -->
+            <div class="model-card">
+                <div class="model-name">Rainbow Pepe</div>
+                <div class="model-spec">
+                    <span class="spec-label">Редкость:</span>
+                    <span class="spec-value rarity-high">0.5%</span>
+                </div>
+                <div class="model-spec">
+                    <span class="spec-label">В наличии:</span>
+                    <span class="spec-value count-medium">15 шт.</span>
+                </div>
+            </div>
+            
+            <!-- Модель 3 -->
+            <div class="model-card">
+                <div class="model-name">Party Pepe</div>
+                <div class="model-spec">
+                    <span class="spec-label">Редкость:</span>
+                    <span class="spec-value rarity-medium">5%</span>
+                </div>
+                <div class="model-spec">
+                    <span class="spec-label">В наличии:</span>
+                    <span class="spec-value count-high">90 шт.</span>
+                </div>
+            </div>
+            
+            <!-- Модель 4 -->
+            <div class="model-card">
+                <div class="model-name">Smile Pepe</div>
+                <div class="model-spec">
+                    <span class="spec-label">Редкость:</span>
+                    <span class="spec-value rarity-high">0.5%</span>
+                </div>
+                <div class="model-spec">
+                    <span class="spec-label">В наличии:</span>
+                    <span class="spec-value count-medium">25 шт.</span>
+                </div>
+            </div>
+            
+            <!-- Модель 5 -->
+            <div class="model-card">
+                <div class="model-name">Classic Pepe</div>
+                <div class="model-spec">
+                    <span class="spec-label">Редкость:</span>
+                    <span class="spec-value rarity-low">24.6%</span>
+                </div>
+                <div class="model-spec">
+                    <span class="spec-label">В наличии:</span>
+                    <span class="spec-value count-high">2532 шт.</span>
+                </div>
+            </div>
+            
+            <!-- Модель 6 -->
+            <div class="model-card">
+                <div class="model-name">Plush Pepe</div>
+                <div class="model-spec">
+                    <span class="spec-label">Редкость:</span>
+                    <span class="spec-value rarity-high">0.1%</span>
+                </div>
+                <div class="model-spec">
+                    <span class="spec-label">В наличии:</span>
+                    <span class="spec-value count-low">3 шт.</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Общая статистика (опционально) -->
+        <% if (gift && gift.stats) { %>
+        <div class="row mt-5 pt-4 border-top">
+            <div class="col-md-6">
+                <div class="text-center p-4 bg-light rounded">
+                    <h5 class="text-muted">Всего в наличии</h5>
+                    <h2 class="fw-bold">3000</h2>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center p-4 bg-light rounded">
+                    <h5 class="text-muted">Средняя цена</h5>
+                    <h2 class="fw-bold">$369</h2>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Анимация карточек с задержкой
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.model-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+                card.classList.add('fade-in-up');
+            });
+        });
+    </script>
+</body>
+</html>
